@@ -56,7 +56,89 @@
           <div class="body">
             
   <div class="section" id="plugins-base-blocks">
-<h1><tt class="xref py py-mod docutils literal"><span class="pre">plugins.base_blocks</span></tt><a class="headerlink" href="#plugins-base-blocks" title="Permalink to this headline">¶</a></h1>
+<h1><a class="reference internal" href="#module-plugins.base_blocks" title="plugins.base_blocks"><tt class="xref py py-mod docutils literal"><span class="pre">plugins.base_blocks</span></tt></a><a class="headerlink" href="#plugins-base-blocks" title="Permalink to this headline">¶</a></h1>
+<p class="graphviz">
+<img src="../_images/inheritance-f99b935ad63dcda12eed479a000642b06d4bbcf3.png" alt="Inheritance diagram of plugins.base_blocks" usemap="#inheritance4c0c2f4d5b" class="inheritance"/>
+<map id="inheritance4c0c2f4d5b" name="inheritance4c0c2f4d5b">
+<area shape="rect" id="node1" href="../api/generic_models.html#generic_models.IDableObject" title="Class of an object which is accessible through a unique ID. The ID is obtained according various processes wich depend on the class of the object. Though, in all cases, they are given so that they are unique." alt="" coords="780,5,971,31"/>
+<area shape="rect" id="node2" href="../api/generic_models.html#generic_models.SettableObject" title="Class used to normalize the access to an object&#39;s settings." alt="" coords="678,79,881,104"/>
+<area shape="rect" id="node3" href="../api/models.html#models.BlockModel" title="Similarly to the DeviceModel, the BlockModel is used to show the users the available blocks that he can use is his scenarios. Once again, they represent an abstraction layer between the real block and the user." alt="" coords="905,79,1041,104"/>
+<area shape="rect" id="node5" href="../api/scenario.html#scenario.Block" title="The Block class defines the minimum interface that any Block should implement." alt="" coords="725,152,833,177"/>
+<area shape="rect" id="node4" href="#plugins.base_blocks.And" title="The output node of the And block is simply the result of the boolean or operation of its two input nodes." alt="" coords="5,225,172,251"/>
+<area shape="rect" id="node6" href="#plugins.base_blocks.BooleanConstant" title="The output node of the Boolean Constant block remains the same. The value (True or False) can be set in the block settings (in the Majordom App, double tap on the Boolean Constant block and then choose Settings)" alt="" coords="197,225,439,251"/>
+<area shape="rect" id="node7" href="#plugins.base_blocks.InfoBlock" title="The InfoBlock enables the user to add himself informations to Majordom. " alt="" coords="463,225,661,251"/>
+<area shape="rect" id="node9" href="#plugins.base_blocks.Multiply" title="Multiply is a block which has a one input and one output. The input is a MultiInputNode since you can multiply as many operands as you wish." alt="" coords="685,225,874,251"/>
+<area shape="rect" id="node10" href="#plugins.base_blocks.Not" title="The output node of the Not block is simply the logical inverse of its input node." alt="" coords="899,225,1063,251"/>
+<area shape="rect" id="node11" href="#plugins.base_blocks.Or" title="The output node of the Or block is simply the result of the boolean or operation of its two input nodes." alt="" coords="1087,225,1245,251"/>
+<area shape="rect" id="node12" href="#plugins.base_blocks.TriggerOnAlarm" title="TriggerOnAlarm is an example of a more advanced block (it is still quite simple). It enables to implement a simple alarm system." alt="" coords="1270,225,1505,251"/>
+</map>
+</p>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>The base blocks are the first set of blocks provided to the user in order to build scenarios. They are truly simplistic and are intended to simple demonstrations rather than real use. The idea behind blocks is that users can program new blocks themselves and make them available to the rest of the Majordom community, through their github repository for instance. Blocks are indeed particularly easy to program for two main reasons :</dt>
+<dd><ul class="first last simple">
+<li>the programming language used is Python: it is particularly easy and fast to learn. I don&#8217;t mean you become a Python expert in a week, though you may be able to program blocks for your own home automation control center in a couple of days, even if you have never programmed before;</li>
+<li>the software structure of a block has been defined. To sum it up, it is an object which has a list of inputs, a list of outputs and a process function which updates the output nodes when an input is updated.</li>
+</ul>
+</dd>
+</dl>
+<span class="target" id="module-plugins.base_blocks"></span><dl class="class">
+<dt id="plugins.base_blocks.Multiply">
+<em class="property">class </em><tt class="descclassname">plugins.base_blocks.</tt><tt class="descname">Multiply</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#plugins.base_blocks.Multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../api/scenario.html#scenario.Block" title="scenario.Block"><tt class="xref py py-class docutils literal"><span class="pre">scenario.Block</span></tt></a></p>
+<p>Multiply is a block which has a one input and one output. The input is a MultiInputNode since you can multiply as many operands as you wish.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="plugins.base_blocks.Not">
+<em class="property">class </em><tt class="descclassname">plugins.base_blocks.</tt><tt class="descname">Not</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#plugins.base_blocks.Not" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../api/scenario.html#scenario.Block" title="scenario.Block"><tt class="xref py py-class docutils literal"><span class="pre">scenario.Block</span></tt></a></p>
+<p>The output node of the Not block is simply the logical inverse of its input node.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="plugins.base_blocks.BooleanConstant">
+<em class="property">class </em><tt class="descclassname">plugins.base_blocks.</tt><tt class="descname">BooleanConstant</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#plugins.base_blocks.BooleanConstant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../api/scenario.html#scenario.Block" title="scenario.Block"><tt class="xref py py-class docutils literal"><span class="pre">scenario.Block</span></tt></a></p>
+<p>The output node of the Boolean Constant block remains the same. The value (True or False) can be set in the block settings (in the Majordom App, double tap on the Boolean Constant block and then choose Settings)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="plugins.base_blocks.Or">
+<em class="property">class </em><tt class="descclassname">plugins.base_blocks.</tt><tt class="descname">Or</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#plugins.base_blocks.Or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../api/scenario.html#scenario.Block" title="scenario.Block"><tt class="xref py py-class docutils literal"><span class="pre">scenario.Block</span></tt></a></p>
+<p>The output node of the Or block is simply the result of the boolean or operation of its two input nodes.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="plugins.base_blocks.And">
+<em class="property">class </em><tt class="descclassname">plugins.base_blocks.</tt><tt class="descname">And</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#plugins.base_blocks.And" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../api/scenario.html#scenario.Block" title="scenario.Block"><tt class="xref py py-class docutils literal"><span class="pre">scenario.Block</span></tt></a></p>
+<p>The output node of the And block is simply the result of the boolean or operation of its two input nodes.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="plugins.base_blocks.TriggerOnAlarm">
+<em class="property">class </em><tt class="descclassname">plugins.base_blocks.</tt><tt class="descname">TriggerOnAlarm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#plugins.base_blocks.TriggerOnAlarm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../api/scenario.html#scenario.Block" title="scenario.Block"><tt class="xref py py-class docutils literal"><span class="pre">scenario.Block</span></tt></a></p>
+<p>TriggerOnAlarm is an example of a more advanced block (it is still quite simple). It enables to implement a simple alarm system.</p>
+<p>The first input takes an alarm signal. An alarm signal can for instance be obtained through an InfoBlock: it is a way to define a new Information, for instance &#8216;alarm&#8217;, that can then be used independently from the sensors that activate or deactivate it. In concrete terms, it means that you wouldn&#8217;t have to change all the scenarios using the alarm in order to add a new remote that controls the state of the alarm system.</p>
+<p>The second input node takes a trigger input: if this signal is activated (i.e. is True), then the output of the alarm block will turn to True too. Though, if this input becomes False while the alarm is still on, it doesn&#8217;t change the state of the output node of the block. You can only reverse it by switching off the alarm (turning the alarm signal to False).</p>
+<p>This block enables then a slightly more complex behavior than other blocks. It indeed keeps track of an inner state to adapt its reaction to the variation of its inputs. You don&#8217;t want that the alarm turns off when the thief closes the door whose opening sensor had initially turned on your loud alarm.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="plugins.base_blocks.InfoBlock">
+<em class="property">class </em><tt class="descclassname">plugins.base_blocks.</tt><tt class="descname">InfoBlock</tt><big>(</big><em>kernel</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#plugins.base_blocks.InfoBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../api/scenario.html#scenario.Block" title="scenario.Block"><tt class="xref py py-class docutils literal"><span class="pre">scenario.Block</span></tt></a></p>
+<p>The InfoBlock enables the user to add himself informations to Majordom.</p>
+<p>For instance, you can create an &#8216;alarm&#8217; scenario, which controls when the alarm is turned on or off. You would use an InfoBlock to add a new information called &#8216;alarm state&#8217; to your system. To change the name of the associated information, just go in the block&#8217;s settings. In this &#8216;alarm&#8217; scenario, you can specify which remotes will control the state of the alarm: you just have to use an Or block and all the remotes you want.</p>
+<p>Then, you can create as many other scenarios as you want, using this new alarm scenario: it means that the scenarios will depend on this information and not directly on any remote&#8217;s state. Then, it means that you can change, remove, add remotes that control the state of your alarm without modifying all the scenarios that use the &#8216;alarm&#8217; information.</p>
+<p>This is just an example of how to use the InfoBlock; you will find many others. For instance, if you want to obtain a value deduced from the values given by sensors and then reuse this deduced value in other scenarios, InfoBlock is perfect: calculate the average temperature of your apartment, the maximum temperature variation in the day...</p>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -68,6 +150,14 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
             </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">plugins.base_blocks</span></tt></a><ul>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="oregon.html"
                         title="previous chapter"><tt class="docutils literal"><span class="pre">plugins.oregon</span></tt></a></p>

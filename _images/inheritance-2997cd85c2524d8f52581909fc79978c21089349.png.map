@@ -3,5 +3,5 @@
 <area shape="rect" id="node2" href="../api/generic_models.html#generic_models.SettableObject" title="generic_models.SettableObject" alt="" coords="261,79,463,104"/>
 <area shape="rect" id="node3" href="../api/models.html#models.Device" title="Base class for any Device." alt="" coords="229,152,335,177"/>
 <area shape="rect" id="node4" href="../api/models.html#models.Protocol" title="In the model used to design the box, a class deriving from " alt="" coords="384,152,500,177"/>
-<area shape="rect" id="node6" href="#plugins.oregon.Oregon" title="Main class of a protocol plugin." alt="" coords="390,225,542,251"/>
+<area shape="rect" id="node6" title="Main class of a protocol plugin." alt="" coords="390,225,542,251"/>
 </map>

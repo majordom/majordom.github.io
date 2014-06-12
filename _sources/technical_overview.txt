@@ -1,0 +1,10 @@
+Technical overview
+==================
+
+- blocks developed by the community
+- drivers developed by the community
+- software layers: make the upper software layers independent from the lower hardware components
+- scenario editing: how it works now and how it should evolve
+- creation of new blocks: python coding or graphical coding
+- why python? because it is simple
+- why an http interface? because it is the web standard

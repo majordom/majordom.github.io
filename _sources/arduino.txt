@@ -1,11 +1,34 @@
 Arduino Radio custom radio 433MHz modem
 =======================================
 
-Radio reception
----------------
+The Arduino is used as a radio transmitter: it receives and transmits the radio messages for Majordom.
 
-Radio transmission
-------------------
+We chose to move this function to an external micro-controller rather than leaving it on the server because it would keep it busy whereas it has other functions to fulfill.
 
 Communication with the computer
 -------------------------------
+
+On the one hand, outgoing messages must be sent from the computer to the Arduino. To do so, we designed a very simple protocol.
+
+	* Message syntax (each bracket represents a byte)::
+
+		[commande][separator][arguments1-1]...[argument1-n][separator][argument2][separator][argument3][end]
+    
+	* Bytes syntax
+  
+		* 1******* : control [byte]
+			* arguments_number : the number of arguments to wait for
+			* 10000001 : [set]	/	settings command
+				* argument 1 : minimum radio pulse length to considered it as valid
+				* argument 2 : maximum radio pulse length to considered it as valid (no maximum if this argument is not given)
+				* argument 3 : minimum length of successive valid radio pulses so that a message is considered valid and sent to the server
+			* 10000010 : [send]	/	radio transmission command
+				* argument 1 : number of repetitions of the message
+				* argument 2 : length of a 'radio bit'
+				* argument 3..(n+2) : symbols (the first byte gives the length of the symbol in bits)
+				* argument (n+3) : symbol-coded message  
+			* 11111110 : [separator] / arguments separator
+			* 11111111 : [end]       / end of message
+		* 0******* : data [byte] (there are only 7 bits of useful data)
+
+On the other hand, incoming messages must be transferred to the server to be processed by the driver and dispatched to the protocols to be decoded. For the moment, the Arduino sends raw series of bytes to the computer. Each byte sent from the Arduino to the computer contains the length of a radio pulse. In fact, it contains the length (in milliseconds) divided by 32: the division is made in order to save 6 bits. The resulting resolution (32 milliseconds) is more than enough to allow the protocol to decode the messages on the server. 

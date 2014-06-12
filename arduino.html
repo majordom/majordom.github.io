@@ -25,8 +25,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="shortcut icon" href="_static/icone.ico"/>
     <link rel="top" title="Majordom 0.0.9 documentation" href="index.html" />
-    <link rel="next" title="&lt;no title&gt;" href="majordom_app_api.html" />
-    <link rel="prev" title="HTTP interface" href="plugins/http_interface.html" /> 
+    <link rel="next" title="Majordom App API" href="majordom_app_api.html" />
+    <link rel="prev" title="plugins.http_interface" href="plugins/http_interface.html" /> 
   </head>
   <body>
     <div class="related">
@@ -39,10 +39,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="majordom_app_api.html" title="&lt;no title&gt;"
+          <a href="majordom_app_api.html" title="Majordom App API"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="plugins/http_interface.html" title="HTTP interface"
+          <a href="plugins/http_interface.html" title="plugins.http_interface"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Majordom 0.0.9 documentation</a> &raquo;</li> 
       </ul>
@@ -55,14 +55,63 @@
             
   <div class="section" id="arduino-radio-custom-radio-433mhz-modem">
 <h1>Arduino Radio custom radio 433MHz modem<a class="headerlink" href="#arduino-radio-custom-radio-433mhz-modem" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="radio-reception">
-<h2>Radio reception<a class="headerlink" href="#radio-reception" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="radio-transmission">
-<h2>Radio transmission<a class="headerlink" href="#radio-transmission" title="Permalink to this headline">¶</a></h2>
-</div>
+<p>The Arduino is used as a radio transmitter: it receives and transmits the radio messages for Majordom.</p>
+<p>We chose to move this function to an external micro-controller rather than leaving it on the server because it would keep it busy whereas it has other functions to fulfill.</p>
 <div class="section" id="communication-with-the-computer">
 <h2>Communication with the computer<a class="headerlink" href="#communication-with-the-computer" title="Permalink to this headline">¶</a></h2>
+<p>On the one hand, outgoing messages must be sent from the computer to the Arduino. To do so, we designed a very simple protocol.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Message syntax (each bracket represents a byte):</p>
+<div class="highlight-python"><div class="highlight"><pre>[commande][separator][arguments1-1]...[argument1-n][separator][argument2][separator][argument3][end]
+</pre></div>
+</div>
+</li>
+<li><p class="first">Bytes syntax</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>1******* <span class="classifier-delimiter">:</span> <span class="classifier">control [byte]</span></dt>
+<dd><ul class="first last">
+<li><p class="first">arguments_number : the number of arguments to wait for</p>
+</li>
+<li><dl class="first docutils">
+<dt>10000001 <span class="classifier-delimiter">:</span> <span class="classifier">[set]      /       settings command</span></dt>
+<dd><ul class="first last simple">
+<li>argument 1 : minimum radio pulse length to considered it as valid</li>
+<li>argument 2 : maximum radio pulse length to considered it as valid (no maximum if this argument is not given)</li>
+<li>argument 3 : minimum length of successive valid radio pulses so that a message is considered valid and sent to the server</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>10000010 <span class="classifier-delimiter">:</span> <span class="classifier">[send]     /       radio transmission command</span></dt>
+<dd><ul class="first last simple">
+<li>argument 1 : number of repetitions of the message</li>
+<li>argument 2 : length of a &#8216;radio bit&#8217;</li>
+<li>argument 3..(n+2) : symbols (the first byte gives the length of the symbol in bits)</li>
+<li>argument (n+3) : symbol-coded message</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">11111110 : [separator] / arguments separator</p>
+</li>
+<li><p class="first">11111111 : [end]       / end of message</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">0******* : data [byte] (there are only 7 bits of useful data)</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>On the other hand, incoming messages must be transferred to the server to be processed by the driver and dispatched to the protocols to be decoded. For the moment, the Arduino sends raw series of bytes to the computer. Each byte sent from the Arduino to the computer contains the length of a radio pulse. In fact, it contains the length (in milliseconds) divided by 32: the division is made in order to save 6 bits. The resulting resolution (32 milliseconds) is more than enough to allow the protocol to decode the messages on the server.</p>
 </div>
 </div>
 
@@ -78,8 +127,6 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Arduino Radio custom radio 433MHz modem</a><ul>
-<li><a class="reference internal" href="#radio-reception">Radio reception</a></li>
-<li><a class="reference internal" href="#radio-transmission">Radio transmission</a></li>
 <li><a class="reference internal" href="#communication-with-the-computer">Communication with the computer</a></li>
 </ul>
 </li>
@@ -87,10 +134,10 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="plugins/http_interface.html"
-                        title="previous chapter">HTTP interface</a></p>
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">plugins.http_interface</span></tt></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="majordom_app_api.html"
-                        title="next chapter">&lt;no title&gt;</a></p>
+                        title="next chapter">Majordom App API</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/arduino.txt"
@@ -123,10 +170,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="majordom_app_api.html" title="&lt;no title&gt;"
+          <a href="majordom_app_api.html" title="Majordom App API"
              >next</a> |</li>
         <li class="right" >
-          <a href="plugins/http_interface.html" title="HTTP interface"
+          <a href="plugins/http_interface.html" title="plugins.http_interface"
              >previous</a> |</li>
         <li><a href="index.html">Majordom 0.0.9 documentation</a> &raquo;</li> 
       </ul>

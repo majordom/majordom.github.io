@@ -55,11 +55,50 @@
             
   <div class="section" id="plugins-api">
 <h1>Plugins API<a class="headerlink" href="#plugins-api" title="Permalink to this headline">¶</a></h1>
+<p>Majordom offers a simple plugin system. Plugins are Python modules (i.e. files) that have to be located in the &#8216;plugins&#8217; directory and that provide your install of Majordom with new functionalities. Plugins are loaded at start but they may as well be dynamically loaded at runtime in future versions of Majordom (Python offers natively the possibility to import modules at runtime).</p>
+<dl class="docutils">
+<dt>Without plugins, there is only Majordom kernel, which virtually does nothing. There are different kinds of plugins:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt><strong>protocol plugins</strong></dt>
+<dd><dl class="first last docutils">
+<dt>They provide three types of classes to the kernel:</dt>
+<dd><ul class="first last simple">
+<li>a class deriving from Protocol: it is the class that will communicate with the drivers to receive and handle messages before transmitting it to its devices</li>
+<li>as many classes deriving from Device as you want: they will be instantiated when you add a new device to Majordom</li>
+<li>as many classes deriving from DeviceModel as you want: they encapsulate everything needed for the process of adding a given device to the system. For instance, it contains the way that the device should be added (synchronization or automatic detection) and the texts to display to the user during the &#8216;Add a device&#8217; wizard.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>driver plugins</strong></dt>
+<dd><p class="first last">They behave like actual drivers, but inside Majordom. For instance, the <a class="reference internal" href="plugins/arduino_radio.html#module-plugins.arduino_radio" title="plugins.arduino_radio"><tt class="xref py py-mod docutils literal"><span class="pre">plugins.arduino_radio</span></tt></a> driver enables the communication with the arduino hardware used as a 433 MHz radio modem.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>automation plugins</strong></dt>
+<dd><p class="first last">They provide the system with new blocks to be used in the scenarios. For the moment, the only automation plugin available is the <a class="reference internal" href="plugins/base_blocks.html#module-plugins.base_blocks" title="plugins.base_blocks"><tt class="xref py py-mod docutils literal"><span class="pre">plugins.base_blocks</span></tt></a> plugin. It gathers some examples of possible blocks.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>interface plugins</strong></dt>
+<dd><p class="first last">They allow Majordom to communicate with other systems. For instance, the <a class="reference internal" href="plugins/http_interface.html#module-plugins.http_interface" title="plugins.http_interface"><tt class="xref py py-mod docutils literal"><span class="pre">plugins.http_interface</span></tt></a> makes a (for the moment) simplistic http interface available, so that, for instance, a tablet app can access and modify the system.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>For the moment, the four following plugins are available.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="plugins/arduino_radio.html"><tt class="docutils literal"><span class="pre">plugins.arduino_radio</span></tt></a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/nexa.html"><tt class="docutils literal"><span class="pre">plugins.nexa</span></tt></a></li>
-<li class="toctree-l1"><a class="reference internal" href="plugins/oregon.html"><tt class="docutils literal"><span class="pre">plugins.oregon</span></tt></a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/base_blocks.html"><tt class="docutils literal"><span class="pre">plugins.base_blocks</span></tt></a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/http_interface.html"><tt class="docutils literal"><span class="pre">plugins.http_interface</span></tt></a></li>
 </ul>

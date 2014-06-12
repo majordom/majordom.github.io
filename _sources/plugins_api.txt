@@ -1,11 +1,27 @@
 Plugins API
 ===========
 
+Majordom offers a simple plugin system. Plugins are Python modules (i.e. files) that have to be located in the 'plugins' directory and that provide your install of Majordom with new functionalities. Plugins are loaded at start but they may as well be dynamically loaded at runtime in future versions of Majordom (Python offers natively the possibility to import modules at runtime).
+
+Without plugins, there is only Majordom kernel, which virtually does nothing. There are different kinds of plugins:
+	- **protocol plugins** 
+		They provide three types of classes to the kernel:
+			- a class deriving from Protocol: it is the class that will communicate with the drivers to receive and handle messages before transmitting it to its devices
+			- as many classes deriving from Device as you want: they will be instantiated when you add a new device to Majordom
+			- as many classes deriving from DeviceModel as you want: they encapsulate everything needed for the process of adding a given device to the system. For instance, it contains the way that the device should be added (synchronization or automatic detection) and the texts to display to the user during the 'Add a device' wizard. 
+	- **driver plugins**
+		They behave like actual drivers, but inside Majordom. For instance, the :mod:`plugins.arduino_radio` driver enables the communication with the arduino hardware used as a 433 MHz radio modem.
+	- **automation plugins**
+		They provide the system with new blocks to be used in the scenarios. For the moment, the only automation plugin available is the :mod:`plugins.base_blocks` plugin. It gathers some examples of possible blocks.
+	- **interface plugins**
+		They allow Majordom to communicate with other systems. For instance, the :mod:`plugins.http_interface` makes a (for the moment) simplistic http interface available, so that, for instance, a tablet app can access and modify the system.
+
+For the moment, the four following plugins are available.
+
 .. toctree::
 	:maxdepth: 1
 	
 	plugins/arduino_radio
 	plugins/nexa
-	plugins/oregon
 	plugins/base_blocks
 	plugins/http_interface

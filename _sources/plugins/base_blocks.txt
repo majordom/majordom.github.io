@@ -1,2 +1,16 @@
 :mod:`plugins.base_blocks`
 ==========================
+
+.. inheritance-diagram:: plugins.base_blocks
+
+API
+---
+
+The base blocks are the first set of blocks provided to the user in order to build scenarios. They are truly simplistic and are intended to simple demonstrations rather than real use. The idea behind blocks is that users can program new blocks themselves and make them available to the rest of the Majordom community, through their github repository for instance. Blocks are indeed particularly easy to program for two main reasons :
+	 - the programming language used is Python: it is particularly easy and fast to learn. I don't mean you become a Python expert in a week, though you may be able to program blocks for your own home automation control center in a couple of days, even if you have never programmed before;
+	 - the software structure of a block has been defined. To sum it up, it is an object which has a list of inputs, a list of outputs and a process function which updates the output nodes when an input is updated.  
+
+.. automodule:: plugins.base_blocks
+	:members:
+	:member-order: bysource
+	:show-inheritance:
